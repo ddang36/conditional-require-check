@@ -48,7 +48,7 @@ async function action() {
       var item_text = itemType[2];
 	  console.log("completed? "+is_complete);
 	  console.log("itemType "+item_text);
-	 if (selectedItem) {
+	 if (is_complete) {
         console.log("Completed task list item: " + itemType[1]);
       } else {
         console.log("Incomplete task list item: " + itemType[1]);
