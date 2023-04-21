@@ -41,7 +41,6 @@ async function action() {
   var screenChangeIncompleteItems = [];
   var pdfChangeIncompleteItems = [];
   var acordChangeIncompleteItems = [];
-  console.log("bodyList " + bodyList);
   for (let body of bodyList) {
     var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
 	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
@@ -72,15 +71,14 @@ async function action() {
 			console.log("pdf change length " + pdfChangeIncompleteItems.length);
 		  }
 	  }  else if (!changeTypeSelected)  {
-           changeTypeincompleteItems.push(itemType[2]);
+           changeTypeincompleteItems.push(item_text[2]);
 	  } 
     }
 	
   }
   if (changeTypeincompleteItems.length > 0) {
     core.setFailed(
-      "1 of the following change type are not selected: " +
-        "change type : " + changeTypeincompleteItems.join("\n")
+      "Change type not selected: " + changeTypeincompleteItems.join("\n")
     );
     return;
   }
