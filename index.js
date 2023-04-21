@@ -38,7 +38,6 @@ async function action() {
   var screenChangeIncompleteItems = [];
   var pdfChangeIncompleteItems = [];
   var acordChangeIncompleteItems = [];
-  console.log("bodyList " + bodyList.length + " " +bodyList[0] + " "+ bodyList[1]);
   for (let body of bodyList) {
     var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
 	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
@@ -49,6 +48,7 @@ async function action() {
       var item_text = itemType[2];
 	   if(itemSelected && (item_text == "Screen Change" || item_text == "103 XSL Update" || item_text == "PDF" || item_text == "103 XSL Update" || item_text =="Config" || item_text=="Performance" || item_text =="VB Custom Assembly" || item_text == "JS Custom Assembly")) {
 		  if (item_text == "Screen Change") {
+			  console.log("screen action match " + screenActionMatch);
 			  for (let item of screenActionMatch) {
 				  var screen_action_is_complete = item[1] != " ";
 				  var screen_action_text = item[2] != " ";
