@@ -47,6 +47,8 @@ async function action() {
       var itemSelected = itemType[1] != " ";
       var item_text = itemType[2];
 	  if(itemSelected) {
+		  console.log("item type " + item_text;
+		  console.log("item selected " + itemSelected);
 		  if (item_text == "Screen Change") {
 			  for (let item of screenActionMatch) {
 				  var screen_action_is_complete = item[1] != " ";
@@ -93,8 +95,6 @@ async function action() {
 	  }
  */    }
 	
-	
-  }
 
   if (changeTypeincompleteItems.length > 0) {
     core.setFailed(
