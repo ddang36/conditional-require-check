@@ -59,6 +59,7 @@ async function action() {
 					screenChangeIncompleteItems.push(item[2]);
 			    }
 			}
+
 		  } else if (item_text == "PDF") {
 			for (let item of pdfActionMatch) {
 				var action_is_complete = item[1] != " ";
@@ -68,7 +69,7 @@ async function action() {
 			    }
 			}
 		  }
-	  }  else {
+	  }  else if (!changeTypeSelected)  {
            changeTypeincompleteItems.push(item_text);
 	  } 
     }
