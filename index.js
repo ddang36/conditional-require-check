@@ -61,8 +61,8 @@ async function action() {
 			  }
 		  }
 	  } else {
-		  console.log("No change type selected: " + item[2]);
-           changeTypeincompleteItems.push(item[2]);
+		  console.log("No change type selected: " + itemType[2]);
+           changeTypeincompleteItems.push(itemType[2]);
 	  }
  	  
 	  
@@ -97,7 +97,7 @@ async function action() {
   if (changeTypeincompleteItems.length > 0) {
     core.setFailed(
       "The following items are not marked as completed: " +
-        "change type : " + changeTypeincompleteItems.join(", ")
+        "change type : " + changeTypeincompleteItems.join("\n")
     );
     return;
   }
