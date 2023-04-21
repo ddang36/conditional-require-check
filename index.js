@@ -1,8 +1,8 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 
-const TASK_LIST_ITEM_CHANGE_TYPE = /(?:^|\n)\s*-\s+\[([ xX])\]\s+((?!~).*)/g;
-const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /\bScreen Status Validation|Object Properties Validation|Screen and Object Trigger\b/g;
+const TASK_LIST_ITEM_CHANGE_TYPE = /\[([ xX])\]\s\bScreen change,\s,Screen change|\[([ xX])\]\sPDF,\s,PDF\b|\[([ xX])\]\s103 XSL Update,\s,103 XSL Update\b/g;
+const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /\[([ xX])\]\s\\bScreen Status Validation|\[([ xX])\]\s\Object Properties Validation|\[([ xX])\]\s\Screen and Object Trigger\b/g;
 const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /\bForm Trigger in right order and scenario|Data display and behavior (mapping,clearing, font size, font type)|Form's Doctype and docdesc definition in config file|Form's signature variable is defined in Signature attribute\b/g;
 const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /\bParty Relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b/g;
 
@@ -44,24 +44,27 @@ async function action() {
 	var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
     for (let itemType of matches) {
-      var is_complete = itemType[1] != " ";
+      var itemSelected = itemType[1] != " ";
       var item_text = itemType[2];
-	  console.log("item " + itemType);
-	  console.log("completed? "+is_complete);
-	  console.log("item text" + item_text);
-/* 	  if (selectedItem == "Screen Change") {
-		  for (let item of screenActionMatch) {
-			  var screen_action_is_complete = item[1] != " ";
-			  if (screen_action_is_complete) {
-				containCheckList = true;
-				console.log("Completed task list item: " + item);
-			  } else {
-				console.log("Incomplete task list item: " + item);
-				screenChangeIncompleteItems.push(item);
+	  if(itemSelected) {
+		  if (selectedItem == "Screen Change") {
+			  for (let item of screenActionMatch) {
+				  var screen_action_is_complete = item[1] != " ";
+				  if (screen_action_is_complete) {
+					containCheckList = true;
+					console.log("Completed task list item: " + item);
+				  } else {
+					console.log("Incomplete task list item: " + item);
+					screenChangeIncompleteItems.push(item);
+				  }
 			  }
 		  }
+	  } else {
+		  console.log("No change type selected: " + item[2]);
+          changeTypeincompleteItems.push(item[2]);
 	  }
-	  
+ 	  
+/*	  
 	  if (selectedItem == "PDF") {
 		  for (let item of pdfActionMatch) {
 			  var pdf_action_is_complete = item[1] != " ";
