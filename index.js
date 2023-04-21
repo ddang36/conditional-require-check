@@ -101,7 +101,7 @@ async function action() {
 	  if (itemType == "103 XSL Update") {
 		  for (let item of acordActionMatch) {
 			  var acord_action_is_complete = item[1] != " ";
-			  if (pdf_action_is_complete) {
+			  if (acord_action_is_complete) {
 				containCheckList = true;
 				console.log("Completed task list item: " + item);
 			  } else {
