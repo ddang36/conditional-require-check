@@ -47,21 +47,22 @@ async function action() {
       var itemSelected = itemType[1] != " ";
       var item_text = itemType[2];
 	  if(itemSelected) {
-		  if (selectedItem == "Screen Change") {
+		  if (item_text == "Screen Change") {
 			  for (let item of screenActionMatch) {
 				  var screen_action_is_complete = item[1] != " ";
+				  var screen_action_text = item[2] != " ";
 				  if (screen_action_is_complete) {
 					containCheckList = true;
 					console.log("Completed task list item: " + item);
 				  } else {
-					console.log("Incomplete task list item: " + item);
+					console.log("Incomplete task list item: " + screen_action_text);
 					screenChangeIncompleteItems.push(item);
 				  }
 			  }
 		  }
 	  } else {
-		  console.log("No change type selected: " + item[2]);
-          changeTypeincompleteItems.push(item[2]);
+		  cconsole.log("No change type selected: " + item[2]);
+           changeTypeincompleteItems.push(item[2]);
 	  }
  	  
 /*	  
