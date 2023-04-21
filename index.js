@@ -52,14 +52,7 @@ async function action() {
 	   if(itemSelected) {
 		  changeTypeSelected = true;
 		  if (item_text == "Screen Change") {
-			for (let item of screenActionMatch) {
-				var action_is_complete = item[1] != " ";
-				var action_text = item[2] != " ";
-				if (!action_is_complete) {
-					screenChangeIncompleteItems.push(item[2]);
-			    }
-			}
-
+			CheckIfTaskListComplete(item_text,screenActionMatch,screenChangeIncompleteItems);
 		  } else if (item_text == "PDF") {
 			for (let item of pdfActionMatch) {
 				var action_is_complete = item[1] != " ";
@@ -117,22 +110,16 @@ if (require.main === module) {
   action();
 }
 
-function CheckIfTaskListComplete(changeType,taskList) {
+function CheckIfTaskListComplete(changeType,taskList,incompleteItem) {
 	var taskListCompleted = false;
 	for (let item of taskList) {
 		var action_is_complete = item[1] != " ";
 		var action_text = item[2] != " ";
 	    if (action_is_complete) {
 			taskListCompleted = true;
+	   } else {
+		   incompleteItem.push(action_text);
 	   }
-	}
-	if (!taskListCompleted) {
-		if (changeType == "Screen Change") {
-			console.log("Incomplete screen change task list. Please select at least 1 applicable item at the section Screen Changes Checklist");
-		} else if (changeType == "PDF") {
-			console.log("Incomplete screen change task list. Please select at least 1 applicable item at the section PDF Checklist");
-		}
-		
 	}
 }
 module.exports = action;
