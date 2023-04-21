@@ -75,7 +75,7 @@ async function action() {
   }
 
   const requireChecklist = core.getInput("requireChecklist");
-  if (requireChecklist != "false" && !containsChecklist) {
+  if (requireChecklist != "false" && !containCheckList) {
     core.setFailed(
       "No task list was present and requireChecklist is turned on"
     );
