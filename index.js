@@ -59,7 +59,6 @@ async function action() {
 					screenChangeIncompleteItems.push(item[2]);
 			    }
 			}
-			console.log("screen change length " + screenChangeIncompleteItems.length);
 		  } else if (item_text == "PDF") {
 			for (let item of pdfActionMatch) {
 				var action_is_complete = item[1] != " ";
@@ -68,9 +67,8 @@ async function action() {
 					pdfChangeIncompleteItems.push(item[2]);
 			    }
 			}
-			console.log("pdf change length " + pdfChangeIncompleteItems.length);
 		  }
-	  }  else if (!changeTypeSelected)  {
+	  }  else {
            changeTypeincompleteItems.push(item_text[2]);
 	  } 
     }
