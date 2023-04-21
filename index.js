@@ -3,7 +3,7 @@ const github = require("@actions/github");
 
 const TASK_LIST_ITEM_CHANGE_TYPE = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScreen change|PDF|103 XSL Update|Config|Performance|VB Custom Assembly|JS Custom Assembly)\b/g;
 const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScreen Status Validation|Object Properties Validation|Screen and Object Trigger\b)/g;
-const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /\bForm Trigger in right order and scenario|Data display and behavior (mapping,clearing, font size, font type)|Form's Doctype and docdesc definition in config file|Form's signature variable is defined in Signature attribute\b/g;
+const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bForm Trigger in right order and scenario|Data Handling. For Example : mapping, clearing, font type, font size|Form's Doctype and docdesc definition in config file|Form's signature variable is defined in Signature attribute\b)/g;
 const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /\bParty Relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b/g;
 
 async function action() {
@@ -53,7 +53,7 @@ async function action() {
 		  if (item_text == "Screen Change") {
 			  CheckIfTaskListComplete(item_text,screenActionMatch);
 		  } else if (item_text == "PDF") {
-			  CheckIfTaskListComplete(item_text,screenActionMatch);
+			  CheckIfTaskListComplete(item_text,pdfActionMatch);
 		  }
 	  }  else if (!changeTypeSelected)  {
            changeTypeincompleteItems.push(itemType[2]);
