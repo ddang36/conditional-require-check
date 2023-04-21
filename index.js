@@ -40,7 +40,7 @@ async function action() {
   var acordChangeIncompleteItems = [];
   for (let body of bodyList) {
     var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
-	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
+	var screenActionMatch = [...body.match(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
     for (let itemType of matches) {
