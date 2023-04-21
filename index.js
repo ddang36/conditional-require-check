@@ -39,9 +39,9 @@ async function action() {
     var matches = [...body.match(TASK_LIST_ITEM_CHANGE_TYPE)];
 	var screenActionMatch = [...body.match(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
     for (let itemType of matches) {
-      var is_complete = item[1] != " ";
+      var is_complete = itemType[1] != " ";
 
-	  if (item == "Screen Change") {
+	  if (itemType == "Screen Change") {
 		  for (let item of screenActionMatch) {
 			  var screen_action_is_complete = item[1] != " ";
 			  if (screen_action_is_complete) {
