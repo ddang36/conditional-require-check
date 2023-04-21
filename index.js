@@ -36,7 +36,7 @@ async function action() {
   var screenChangeIncompleteItems = [];
   
   for (let body of bodyList) {
-    var matches = [...body.matchAll(TASK_LIST_ITEM)];
+    var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
 	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
     for (let item of matches) {
       var is_complete = item[1] != " ";
