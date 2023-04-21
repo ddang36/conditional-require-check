@@ -54,7 +54,7 @@ async function action() {
 				  var screen_action_text = item[2] != " ";
 				  if (screen_action_is_complete) {
 					containCheckList = true;
-				  } else {
+				  } else if (!containCheckList) {
 					console.log("Incomplete screen change task list. Please select at least 1 applicable item at the section Screen Changes Checklist");
 					screenChangeIncompleteItems.push(item[2]);
 				  }
