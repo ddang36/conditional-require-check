@@ -1,8 +1,8 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 
-const TASK_LIST_ITEM_CHANGE_TYPE = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScreen change|PDF|103 XSL Update|Config|Performance|VB Custom Assembly|JS Custom Assembly)/g;
-const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /\[([ xX])\]\s\\bScreen Status Validation|\[([ xX])\]\s\Object Properties Validation|\[([ xX])\]\s\Screen and Object Trigger\b/g;
+const TASK_LIST_ITEM_CHANGE_TYPE = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScreen change|PDF|103 XSL Update|Config|Performance|VB Custom Assembly|JS Custom Assembly)\b/g;
+const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScreen Status Validation|Object Properties Validation|Screen and Object Trigger\b)/g;
 const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /\bForm Trigger in right order and scenario|Data display and behavior (mapping,clearing, font size, font type)|Form's Doctype and docdesc definition in config file|Form's signature variable is defined in Signature attribute\b/g;
 const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /\bParty Relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b/g;
 
@@ -48,20 +48,10 @@ async function action() {
       var item_text = itemType[2];
 	   if(itemSelected) {
 		  if (item_text == "Screen Change") {
-			  for (let item of screenActionMatch) {
-				  var screen_action_is_complete = item[1] != " ";
-				  var screen_action_text = item[2] != " ";
-				  if (screen_action_is_complete) {
-					containCheckList = true;
-					console.log("Completed task list item: " + item);
-				  } else {
-					console.log("Incomplete task list item: " + screen_action_text);
-					screenChangeIncompleteItems.push(item);
-				  }
-			  }
+			  verifyTaskOfChange(item_text,screenActionMatch,screenChangeIncompleteItems);
 		  }
 	  } else {
-		  console.log("No change type selected: " + itemType[2]);
+		  console.log("No change type selected.Please select at least 1 from the section Type of change" + itemType[2]);
            changeTypeincompleteItems.push(itemType[2]);
 	  }
  	  
@@ -132,7 +122,18 @@ async function action() {
 
   console.log("There are no incomplete task list items");
 }
-
+function verifyTaskOfChange(changeType,taskListofChangeType,containCheckList,incompleteItemList) {
+	for (let item of taskListofChangeType) {
+		var action_is_complete = item[1] != " ";
+		var action_text = item[2] != " ";
+		if (screen_action_is_complete) {
+			containCheckList = true;
+		} else {
+			console.log("Incomplete screen change task list. Please select at least 1 applicable item");
+			incompleteItemList.push(item[2]);
+		}
+	}
+}
 if (require.main === module) {
   action();
 }
