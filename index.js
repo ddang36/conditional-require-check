@@ -47,8 +47,7 @@ async function action() {
       var itemSelected = itemType[1] != " ";
       var item_text = itemType[2];
 	   if(itemSelected) {
-		   console.log("item text" + item_text);
-		  if (item_text == "Screen Change") {
+		  if (item_text == "Screen change") {
 			  console.log("screen action match " + screenActionMatch);
 			  for (let item of screenActionMatch) {
 				  var screen_action_is_complete = item[1] != " ";
