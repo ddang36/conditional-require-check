@@ -67,8 +67,8 @@ async function action() {
            changeTypeincompleteItems.push(item[2]);
 	  }
  	  
-/*	  
-	  if (selectedItem == "PDF") {
+	  
+/* 	  if (selectedItem == "PDF") {
 		  for (let item of pdfActionMatch) {
 			  var pdf_action_is_complete = item[1] != " ";
 			  if (pdf_action_is_complete) {
@@ -92,10 +92,10 @@ async function action() {
 				acordChangeIncompleteItems.push(item);
 			  }
 		  }
-	  }
- */    }
+	  } */
+    }
 	
-
+  }
   if (changeTypeincompleteItems.length > 0) {
     core.setFailed(
       "The following items are not marked as completed: " +
