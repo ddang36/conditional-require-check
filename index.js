@@ -48,34 +48,14 @@ async function action() {
       var itemSelected = itemType[1] != " ";
       var item_text = itemType[2];
 	   if(itemSelected) {
-		  if (item_text == "Screen change") {
-			  for (let item of screenActionMatch) {
-				  var screen_action_is_complete = item[1] != " ";
-				  var screen_action_text = item[2] != " ";
-				  if (screen_action_is_complete) {
-					screenTaskListCompleted = true;
-				  }
-			  }
-			  if (!screenTaskListCompleted) {
-				  console.log("Incomplete screen change task list. Please select at least 1 applicable item at the section Screen Changes Checklist");
-			  }
-		  } 
-	  } /* else  {
 		  if (item_text == "Screen Change") {
-			  for (let item of screenActionMatch) {
-				  var screen_action_is_complete = item[1] != " ";
-				  var screen_action_text = item[2] != " ";
-				  if (screen_action_is_complete) {
-					containCheckList = true;
-				  } else {
-					console.log("Incomplete screen change task list. Please select at least 1 applicable item at the section Screen Changes Checklist");
-					screenChangeIncompleteItems.push(item[2]);
-				  }
-			  }
+			  CheckIfTaskListComplete(item_text,screenActionMatch);
+		  } else if (item_text == "PDF") {
+			  CheckIfTaskListComplete(item_text,screenActionMatch);
 		  }
-		  console.log("No change type selected.Please select at least 1 from the section " + itemType[2]);
-           changeTypeincompleteItems.push(itemType[2]);
-	  } */
+	  } else  {
+		console.log("No change type selected.Please select at least 1 change type");
+	  }
  	  
 	  
 /* 	  if (selectedItem == "PDF") {
