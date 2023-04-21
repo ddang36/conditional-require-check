@@ -1,7 +1,7 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 
-const TASK_LIST_ITEM_CHANGE_TYPE = /\[([ xX])\]\s\bScreen change,\s,Screen change|\[([ xX])\]\sPDF,\s,PDF\b|\[([ xX])\]\s103 XSL Update,\s,103 XSL Update\b/g;
+const TASK_LIST_ITEM_CHANGE_TYPE = /(?:^|\n)\s*-\s+\[([ xX])\]\s+((?!~).*)/g;
 const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /\[([ xX])\]\s\\bScreen Status Validation|\[([ xX])\]\s\Object Properties Validation|\[([ xX])\]\s\Screen and Object Trigger\b/g;
 const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /\bForm Trigger in right order and scenario|Data display and behavior (mapping,clearing, font size, font type)|Form's Doctype and docdesc definition in config file|Form's signature variable is defined in Signature attribute\b/g;
 const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /\bParty Relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b/g;
@@ -39,18 +39,15 @@ async function action() {
   var pdfChangeIncompleteItems = [];
   var acordChangeIncompleteItems = [];
   for (let body of bodyList) {
+	console.log("body list " + bodyList);
     var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
 	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
-	console.log("matches " + matches);
     for (let itemType of matches) {
       var itemSelected = itemType[1] != " ";
       var item_text = itemType[2];
-	  
-	  if(itemSelected) {
-		  console.log("item type " + item_text);
-		  console.log("item selected " + itemSelected);
+	  /* if(itemSelected) {
 		  if (item_text == "Screen Change") {
 			  for (let item of screenActionMatch) {
 				  var screen_action_is_complete = item[1] != " ";
@@ -67,7 +64,7 @@ async function action() {
 	  } else {
 		  cconsole.log("No change type selected: " + item[2]);
            changeTypeincompleteItems.push(item[2]);
-	  }
+	  } */
  	  
 	  
 /* 	  if (selectedItem == "PDF") {
