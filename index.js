@@ -36,22 +36,20 @@ async function action() {
   var screenChangeIncompleteItems = [];
   
   for (let body of bodyList) {
-    var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
-	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
+    var matches = [...body.match(TASK_LIST_ITEM_CHANGE_TYPE)];
+	var screenActionMatch = [...body.match(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
     for (let item of matches) {
       var is_complete = item[1] != " ";
-      var item_text = item[2];
 
-	  if (item_text == "Screen Change") {
+	  if (item == "Screen Change") {
 		  for (let item of screenActionMatch) {
 			  var screen_action_is_complete = item[1] != " ";
-			  var screen_action_item_text = item[2];
 			  if (screen_action_is_complete) {
-				  containCheckList = true;
-				console.log("Completed task list item: " + item[2]);
+				containCheckList = true;
+				console.log("Completed task list item: " + item);
 			  } else {
-				console.log("Incomplete task list item: " + item[2]);
-				changeTypeincompleteItems.push(item[2]);
+				console.log("Incomplete task list item: " + item);
+				screenActionMatch.push(item);
 			  }
 		  }
 	  }
@@ -72,6 +70,14 @@ async function action() {
     core.setFailed(
       "The following items are not marked as completed: " +
         "change type : " + changeTypeincompleteItems.join(", ")
+    );
+    return;
+  }
+  
+  if (screenActionMatch.length > 0) {
+    core.setFailed(
+      "The following items are not marked as completed for screen : " +
+        "change type : " + screenActionMatch.join(", ")
     );
     return;
   }
