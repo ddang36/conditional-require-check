@@ -43,9 +43,11 @@ async function action() {
 	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
+	console.log("matches " + matches);
     for (let itemType of matches) {
       var itemSelected = itemType[1] != " ";
       var item_text = itemType[2];
+	  
 	  if(itemSelected) {
 		  console.log("item type " + item_text);
 		  console.log("item selected " + itemSelected);
