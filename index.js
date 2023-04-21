@@ -60,7 +60,7 @@ async function action() {
 				  }
 			  }
 		  } 
-	  } e/* lse  {
+	  } /* else  {
 		  if (item_text == "Screen Change") {
 			  for (let item of screenActionMatch) {
 				  var screen_action_is_complete = item[1] != " ";
