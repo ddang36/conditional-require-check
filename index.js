@@ -31,6 +31,7 @@ async function action() {
   }
 
   // Check each comment for a checklist
+  let screenTaskListCompleted = false;
   let containCheckList = false;
   let ScreenChangeContainsChecklist = false;
   let PDFChangeContainChecklist = false;
@@ -53,11 +54,11 @@ async function action() {
 				  var screen_action_is_complete = item[1] != " ";
 				  var screen_action_text = item[2] != " ";
 				  if (screen_action_is_complete) {
-					containCheckList = true;
-				  } else if (!containCheckList) {
-					console.log("Incomplete screen change task list. Please select at least 1 applicable item at the section Screen Changes Checklist");
-					screenChangeIncompleteItems.push(item[2]);
+					screenTaskListCompleted = true;
 				  }
+			  }
+			  if (!screenTaskListCompleted) {
+				  console.log("Incomplete screen change task list. Please select at least 1 applicable item at the section Screen Changes Checklist");
 			  }
 		  } 
 	  } /* else  {
