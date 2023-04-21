@@ -46,11 +46,11 @@ async function action() {
 	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
-	console.log("body " + body);
     for (let itemType of matches) {
       var itemSelected = itemType[1] != " ";
       var item_text = itemType[2];
 	   if(itemSelected) {
+		  changeTypeSelected = true;
 		  if (item_text == "Screen Change") {
 			for (let item of screenActionMatch) {
 				var action_is_complete = item[1] != " ";
@@ -69,7 +69,7 @@ async function action() {
 			    }
 			}
 		  }
-	  }  else  {
+	  }  else if (!changeTypeSelected)  {
            changeTypeincompleteItems.push(item_text);
 	  } 
     }
@@ -77,7 +77,7 @@ async function action() {
   }
   if (changeTypeincompleteItems.length > 0) {
     core.setFailed(
-      "Change type not selected: " + changeTypeincompleteItems.join(",")
+      "Change type not selected: " + changeTypeincompleteItems.join("\n")
     );
     return;
   }
