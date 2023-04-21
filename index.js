@@ -41,6 +41,7 @@ async function action() {
   var screenChangeIncompleteItems = [];
   var pdfChangeIncompleteItems = [];
   var acordChangeIncompleteItems = [];
+  console.log("bodyList " + bodyList);
   for (let body of bodyList) {
     var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
 	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
