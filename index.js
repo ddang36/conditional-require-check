@@ -61,7 +61,7 @@ async function action() {
 			  }
 		  }
 	  } else {
-		  cconsole.log("No change type selected: " + item[2]);
+		  console.log("No change type selected: " + item[2]);
            changeTypeincompleteItems.push(item[2]);
 	  }
  	  
