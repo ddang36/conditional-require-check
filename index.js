@@ -122,7 +122,7 @@ async function action() {
 
   console.log("There are no incomplete task list items");
 }
-function verifyTaskOfChange(changeType,taskListofChangeType,containCheckList,incompleteItemList) {
+void function verifyTaskOfChange(changeType,taskListofChangeType,containCheckList,incompleteItemList) {
 	for (let item of taskListofChangeType) {
 		var action_is_complete = item[1] != " ";
 		var action_text = item[2] != " ";
