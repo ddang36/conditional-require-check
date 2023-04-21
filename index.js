@@ -45,7 +45,7 @@ async function action() {
 	var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
     for (let itemType of matches) {
       var selectedItem = itemType[1] != " ";
-
+	  console.log("itemType "+itemType)
 	 if (selectedItem) {
         console.log("Completed task list item: " + itemType[1]);
       } else {
