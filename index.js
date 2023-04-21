@@ -53,42 +53,27 @@ async function action() {
 		  } else if (item_text == "PDF") {
 			  CheckIfTaskListComplete(item_text,screenActionMatch);
 		  }
-	  } else  {
-		console.log("No change type selected.Please select at least 1 change type");
-	  }
- 	  
-	  
-/* 	  if (selectedItem == "PDF") {
-		  for (let item of pdfActionMatch) {
-			  var pdf_action_is_complete = item[1] != " ";
-			  if (pdf_action_is_complete) {
-				containCheckList = true;
-				console.log("Completed task list item: " + item);
-			  } else {
-				console.log("Incomplete task list item: " + item);
-				pdfChangeIncompleteItems.push(item);
+	  }  else  {
+		  if (item_text == "Screen Change") {
+			  for (let item of screenActionMatch) {
+				  var screen_action_is_complete = item[1] != " ";
+				  var screen_action_text = item[2] != " ";
+				  if (screen_action_is_complete) {
+					containCheckList = true;
+				  } else {
+					console.log("Incomplete screen change task list. Please select at least 1 applicable item at the section Screen Changes Checklist");
+					screenChangeIncompleteItems.push(item[2]);
+				  }
 			  }
 		  }
-	  }
-	    
-	  if (selectedItem == "103 XSL Update") {
-		  for (let item of acordActionMatch) {
-			  var acord_action_is_complete = item[1] != " ";
-			  if (acord_action_is_complete) {
-				containCheckList = true;
-				console.log("Completed task list item: " + item);
-			  } else {
-				console.log("Incomplete task list item: " + item);
-				acordChangeIncompleteItems.push(item);
-			  }
-		  }
-	  } */
+           changeTypeincompleteItems.push(itemType[2]);
+	  } 
     }
 	
   }
   if (changeTypeincompleteItems.length > 0) {
     core.setFailed(
-      "The following items are not marked as completed: " +
+      "1 of the following change type are not selected: " +
         "change type : " + changeTypeincompleteItems.join("\n")
     );
     return;
