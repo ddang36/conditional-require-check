@@ -69,7 +69,7 @@ async function action() {
 			    }
 			}
 		  }
-	  }  else if (!changeTypeSelected)  {
+	  }  else  {
            changeTypeincompleteItems.push(item_text);
 	  } 
     }
