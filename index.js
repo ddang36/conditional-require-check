@@ -42,7 +42,7 @@ async function action() {
     var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
 	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
-	var acordActionMatch=[...body.MatchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
+	var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
     for (let itemType of matches) {
       var is_complete = itemType[1] != " ";
 
