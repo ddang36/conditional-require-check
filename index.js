@@ -3,6 +3,8 @@ const github = require("@actions/github");
 
 const TASK_LIST_ITEM_CHANGE_TYPE = /\bScreen Change|PDF|103 XSL Update|Config|Performance|VB Custom Assembly|JS Custom Assembly\b/g;
 const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /\bScreen Status Validation|Object Properties Validation|Screen and Object Trigger\b/g;
+const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /\bForm Trigger in right order and scenario|Data display and behavior (mapping,clearing, font size, font type)|Form's Doctype and docdesc definition in config file|Form's signature variable is defined in Signature attribute\b/g;
+const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /\bParty Relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b/g;
 
 async function action() {
   const bodyList = [];
@@ -34,10 +36,13 @@ async function action() {
   let PDFChangeContainChecklist = false;
   var changeTypeincompleteItems = [];
   var screenChangeIncompleteItems = [];
-  
+  var pdfChangeIncompleteItems = [];
+  var acordChangeIncompleteItems = [];
   for (let body of bodyList) {
-    var matches = [...body.match(TASK_LIST_ITEM_CHANGE_TYPE)];
-	var screenActionMatch = [...body.match(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
+    var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
+	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
+	var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
+	var acordActionMatch=[...body.MatchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
     for (let itemType of matches) {
       var is_complete = itemType[1] != " ";
 
@@ -49,18 +54,62 @@ async function action() {
 				console.log("Completed task list item: " + item);
 			  } else {
 				console.log("Incomplete task list item: " + item);
-				screenActionMatch.push(item);
+				screenChangeIncompleteItems.push(item);
 			  }
 		  }
 	  }
-      if (is_complete) {
-		console.log("Completed marches: " + matches);
-        console.log("Completed change type checklist: " + itemType);
-		
-      } else {
-        console.log("Incomplete task list item: " + item[2]);
-        changeTypeincompleteItems.push(item[2]);
-      }
+	  
+	  if (itemType == "PDF") {
+		  for (let item of pdfActionMatch) {
+			  var pdf_action_is_complete = item[1] != " ";
+			  if (pdf_action_is_complete) {
+				containCheckList = true;
+				console.log("Completed task list item: " + item);
+			  } else {
+				console.log("Incomplete task list item: " + item);
+				pdfChangeIncompleteItems.push(item);
+			  }
+		  }
+	  }
+	  
+	  if (itemType == "PDF") {
+		  for (let item of pdfActionMatch) {
+			  var pdf_action_is_complete = item[1] != " ";
+			  if (pdf_action_is_complete) {
+				containCheckList = true;
+				console.log("Completed task list item: " + item);
+			  } else {
+				console.log("Incomplete task list item: " + item);
+				pdfChangeIncompleteItems.push(item);
+			  }
+		  }
+	  }
+	  
+	  if (itemType == "PDF") {
+		  for (let item of pdfActionMatch) {
+			  var pdf_action_is_complete = item[1] != " ";
+			  if (pdf_action_is_complete) {
+				containCheckList = true;
+				console.log("Completed task list item: " + item);
+			  } else {
+				console.log("Incomplete task list item: " + item);
+				pdfChangeIncompleteItems.push(item);
+			  }
+		  }
+	  }
+	  
+	  if (itemType == "103 XSL Update") {
+		  for (let item of acordActionMatch) {
+			  var acord_action_is_complete = item[1] != " ";
+			  if (pdf_action_is_complete) {
+				containCheckList = true;
+				console.log("Completed task list item: " + item);
+			  } else {
+				console.log("Incomplete task list item: " + item);
+				acordChangeIncompleteItems.push(item);
+			  }
+		  }
+	  }
     }
 	
 	
@@ -74,12 +123,24 @@ async function action() {
     return;
   }
   
-  if (screenActionMatch.length > 0) {
+  if (screenChangeIncompleteItems.length > 0) {
     core.setFailed(
-      "The following items are not marked as completed for screen : " +
-        "change type : " + screenActionMatch.join(", ")
+      "The following items are not marked as completed for screen checklist : " + screenChangeIncompleteItems.join("\n")
     );
     return;
+  }
+  
+  if (pdfChangeIncompleteItems.length > 0) {
+    core.setFailed(
+      "The following items are not marked as completed for pdf checklist : " + pdfChangeIncompleteItems.join("\n")
+    );
+    return;
+  }
+  
+  if (acordChangeIncompleteItems.length > 0) {
+	  core.setFailed(
+      "The following items are not marked as completed for acord checklist : " + acordChangeIncompleteItems.join("\n")
+    );
   }
 
   const requireChecklist = core.getInput("requireChecklist");
