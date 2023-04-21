@@ -56,7 +56,9 @@ async function action() {
 		  }
 	  }
       if (is_complete) {
-        console.log("Completed task list item: " + item[2]);
+		console.log("Completed marches: " + matches);
+        console.log("Completed task list item: " + item);
+		
       } else {
         console.log("Incomplete task list item: " + item[2]);
         changeTypeincompleteItems.push(item[2]);
