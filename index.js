@@ -40,7 +40,7 @@ async function action() {
   var acordChangeIncompleteItems = [];
   for (let body of bodyList) {
     var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
-	var screenActionMatch = [...body.match(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
+	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
     for (let itemType of matches) {
@@ -48,6 +48,7 @@ async function action() {
       var item_text = itemType[2];
 	  console.log("item " + itemType);
 	  console.log("completed? "+is_complete);
+	  console.log("item text" + item_text);
 /* 	  if (selectedItem == "Screen Change") {
 		  for (let item of screenActionMatch) {
 			  var screen_action_is_complete = item[1] != " ";
