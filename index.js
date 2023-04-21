@@ -44,9 +44,9 @@ async function action() {
 	var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
 	var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
     for (let itemType of matches) {
-      var is_complete = itemType[1] != " ";
+      var selectedItem = itemType[1] != " ";
 
-	  if (itemType == "Screen Change") {
+	  if (selectedItem == "Screen Change") {
 		  for (let item of screenActionMatch) {
 			  var screen_action_is_complete = item[1] != " ";
 			  if (screen_action_is_complete) {
@@ -59,7 +59,7 @@ async function action() {
 		  }
 	  }
 	  
-	  if (itemType == "PDF") {
+	  if (selectedItem == "PDF") {
 		  for (let item of pdfActionMatch) {
 			  var pdf_action_is_complete = item[1] != " ";
 			  if (pdf_action_is_complete) {
@@ -71,34 +71,8 @@ async function action() {
 			  }
 		  }
 	  }
-	  
-	  if (itemType == "PDF") {
-		  for (let item of pdfActionMatch) {
-			  var pdf_action_is_complete = item[1] != " ";
-			  if (pdf_action_is_complete) {
-				containCheckList = true;
-				console.log("Completed task list item: " + item);
-			  } else {
-				console.log("Incomplete task list item: " + item);
-				pdfChangeIncompleteItems.push(item);
-			  }
-		  }
-	  }
-	  
-	  if (itemType == "PDF") {
-		  for (let item of pdfActionMatch) {
-			  var pdf_action_is_complete = item[1] != " ";
-			  if (pdf_action_is_complete) {
-				containCheckList = true;
-				console.log("Completed task list item: " + item);
-			  } else {
-				console.log("Incomplete task list item: " + item);
-				pdfChangeIncompleteItems.push(item);
-			  }
-		  }
-	  }
-	  
-	  if (itemType == "103 XSL Update") {
+	    
+	  if (selectedItem == "103 XSL Update") {
 		  for (let item of acordActionMatch) {
 			  var acord_action_is_complete = item[1] != " ";
 			  if (acord_action_is_complete) {
