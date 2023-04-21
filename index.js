@@ -40,7 +40,7 @@ async function action() {
   var acordChangeIncompleteItems = [];
   let changeTypeChecked = false;
   console.log("bodyList " + bodyList);
-  var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
+  var matches = [...bodyList.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
   for (let itemType of matches) {
       var itemSelected = itemType[1] != " ";
       var item_text = itemType[2];
