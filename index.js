@@ -32,6 +32,7 @@ async function action() {
 
   // Check each comment for a checklist
   let screenTaskListCompleted = false;
+  let pdfTaskListCompleted = false;
   let changeTypeSelected = false;
   let containCheckList = false;
   let ScreenChangeContainsChecklist = false;
@@ -51,9 +52,21 @@ async function action() {
 	   if(itemSelected) {
 		  changeTypeSelected = true;
 		  if (item_text == "Screen Change") {
-			  CheckIfTaskListComplete(item_text,screenActionMatch);
+			for (let item of screenActionMatch) {
+				var action_is_complete = item[1] != " ";
+				var action_text = item[2] != " ";
+				if (!action_is_complete) {
+					screenChangeIncompleteItems.push(item[2]);
+			    }
+			}
 		  } else if (item_text == "PDF") {
-			  CheckIfTaskListComplete(item_text,pdfActionMatch);
+			for (let item of pdfActionMatch) {
+				var action_is_complete = item[1] != " ";
+				var action_text = item[2] != " ";
+				if (!action_is_complete) {
+					pdfChangeIncompleteItems.push(item[2]);
+			    }
+			}
 		  }
 	  }  else if (!changeTypeSelected)  {
            changeTypeincompleteItems.push(itemType[2]);
