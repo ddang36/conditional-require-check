@@ -70,7 +70,7 @@ async function action() {
 			}
 		  }
 	  }  else  {
-           changeTypeincompleteItems.push(item_text);
+           changeTypeincompleteItems.push(itemType[2]);
 	  } 
     }
 	
