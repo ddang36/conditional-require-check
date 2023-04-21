@@ -46,14 +46,8 @@ async function action() {
     for (let itemType of matches) {
       var is_complete = itemType[1] != " ";
       var item_text = itemType[2];
+	  console.log("item " + itemType);
 	  console.log("completed? "+is_complete);
-	  console.log("itemType "+item_text);
-	 if (is_complete) {
-        console.log("Completed task list item: " + itemType[1]);
-      } else {
-        console.log("Incomplete task list item: " + itemType[1]);
-        changeTypeincompleteItems.push(itemType[2]);
-      }
 /* 	  if (selectedItem == "Screen Change") {
 		  for (let item of screenActionMatch) {
 			  var screen_action_is_complete = item[1] != " ";
