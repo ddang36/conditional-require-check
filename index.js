@@ -1,7 +1,7 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 
-const TASK_LIST_ITEM_CHANGE_TYPE = /\bScreen Change|PDF|103 XSL Update|Config|Performance|VB Custom Assembly|JS Custom Assembly\b/g;
+const TASK_LIST_ITEM_CHANGE_TYPE = /\b[([ xX])\]+Screen Change|[([ xX])\]+PDF|[([ xX])\]+103 XSL Update|[([ xX])\]+Config|[([ xX])\]+Performance|[([ xX])\]+VB Custom Assembly|[([ xX])\]+JS Custom Assembly\b/g;
 const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /\bScreen Status Validation|Object Properties Validation|Screen and Object Trigger\b/g;
 const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /\bForm Trigger in right order and scenario|Data display and behavior (mapping,clearing, font size, font type)|Form's Doctype and docdesc definition in config file|Form's signature variable is defined in Signature attribute\b/g;
 const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /\bParty Relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b/g;
