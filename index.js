@@ -46,7 +46,8 @@ async function action() {
     for (let itemType of matches) {
       var itemSelected = itemType[1] != " ";
       var item_text = itemType[2];
-	   if(itemSelected && (item_text == "Screen Change" || item_text == "103 XSL Update" || item_text == "PDF" || item_text == "103 XSL Update" || item_text =="Config" || item_text=="Performance" || item_text =="VB Custom Assembly" || item_text == "JS Custom Assembly")) {
+	   if(itemSelected) {
+		   console.log("item text" + item_text);
 		  if (item_text == "Screen Change") {
 			  console.log("screen action match " + screenActionMatch);
 			  for (let item of screenActionMatch) {
