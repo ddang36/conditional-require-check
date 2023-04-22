@@ -62,7 +62,7 @@ async function action() {
 	  }
     }
   }
-  if (changeTypeincompleteItems.length > 0) {
+  if (!changeTypeSelected) {
     core.setFailed(
       "Change type not selected: " + changeTypeincompleteItems.join("\n")
     );
