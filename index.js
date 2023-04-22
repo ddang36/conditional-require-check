@@ -6,6 +6,8 @@ const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScr
 const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bForm Trigger in right order and scenario|Data Handling. For Example : mapping, clearing, font type, font size|Form's Doctype and docdesc definition in config file|Form's signature variable is defined in Signature attribute\b)/g;
 const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /\bParty Relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b/g;
 
+var screenTaskListCompleted = false;
+var pdfTaskListCompleted = false;
 async function action() {
   const bodyList = [];
 
@@ -31,8 +33,6 @@ async function action() {
   }
 
   // Check each comment for a checklist
-  let screenTaskListCompleted = false;
-  let pdfTaskListCompleted = false;
   let changeTypeSelected = false;
   let containCheckList = false;
   let ScreenChangeContainsChecklist = false;
