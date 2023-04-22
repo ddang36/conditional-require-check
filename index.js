@@ -31,9 +31,9 @@ async function action() {
   }
 
   // Check each comment for a checklist
-  let screenTaskListCompleted = false;
-  let pdfTaskListCompleted = false;
-  let acordTaskListCompleted = false;
+  let screenTaskListCompleted = true;
+  let pdfTaskListCompleted = true;
+  let acordTaskListCompleted = true;
   let changeTypeSelected = false;
   let containCheckList = false;
   let ScreenChangeContainsChecklist = false;
@@ -112,8 +112,8 @@ function CheckIfTaskListComplete(changeType,taskList) {
 	for (let item of taskList) {
 		var action_is_complete = item[1] != " ";
 		var action_text = item[2];
-	    if (action_is_complete) {
-			return true;
+	    if (!action_is_complete) {
+			return false;
 			break;
 	   }
 	}
