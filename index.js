@@ -78,6 +78,7 @@ async function action() {
 		  } 
 		  if (item_text == "JS Custom Assembly") {
 			jsTaskListCompleted = CheckIfTaskListComplete(item_text,jsActionMatch);
+			console.log("jsTaskListCompleted " + jsTaskListCompleted);
 		  }
 	  }
     }
