@@ -85,21 +85,18 @@ async function action() {
     core.setFailed(
       "Change type not selected"
     );
-    return;
   }
   
   if (!screenTaskListCompleted) {
     core.setFailed(
       "Screen checklist not completed"
     );
-    return;
   }
   
   if (!pdfTaskListCompleted) {
     core.setFailed(
       "PDF Checklist not completed"
     );
-    return;
   }
   
   if (!acordTaskListCompleted) {
@@ -131,16 +128,6 @@ async function action() {
       "JS Custom Assembly checklist not completed"
     );
   }
-
-  const requireChecklist = core.getInput("requireChecklist");
-  if (requireChecklist != "false" && !containCheckList) {
-    core.setFailed(
-      "No task list was present and requireChecklist is turned on"
-    );
-    return;
-  }
-
-  console.log("There are no incomplete task list items");
 }
 
 if (require.main === module) {
