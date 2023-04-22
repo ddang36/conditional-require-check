@@ -38,16 +38,12 @@ async function action() {
   let containCheckList = false;
   let ScreenChangeContainsChecklist = false;
   let PDFChangeContainChecklist = false;
-  var changeTypeincompleteItems = [];
-  var screenChangeIncompleteItems = [];
-  var pdfChangeIncompleteItems = [];
-  var acordChangeIncompleteItems = [];
-  for (let body of bodyList) {
-    var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
-	var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
-	var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
-	var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
-    for (let itemType of matches) {
+  let body = bodyList[1];
+  var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
+  var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
+  var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
+  var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
+  for (let itemType of matches) {
       var itemSelected = itemType[1] != " ";
       var item_text = itemType[2];
 	   if(itemSelected) {
@@ -65,7 +61,6 @@ async function action() {
 		  }
 	  }
     }
-  }
   if (!changeTypeSelected) {
     core.setFailed(
       "Change type not selected: " + changeTypeincompleteItems.join("\n")
