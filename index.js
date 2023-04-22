@@ -62,7 +62,6 @@ async function action() {
 			screenTaskListCompleted = CheckIfTaskListComplete(item_text,screenActionMatch);
 		  } 
 		  if (item_text == "PDF") {
-			console.log("pdf task list " + pdfActionMatch);
 			pdfTaskListCompleted = CheckIfTaskListComplete(item_text,pdfActionMatch);
 		  } 
 		  if (item_text == "103 XSL Update") {
@@ -70,7 +69,6 @@ async function action() {
 		  } 
 		  if (item_text == "Config") {
 			configTaskListCompleted = CheckIfTaskListComplete(item_text,configActionMatch);
-			console.log("configTaskListCompleted " + configTaskListCompleted);
 		  } 
 		  if (item_text == "Performance") {
 			performanceTaskListCompleted = CheckIfTaskListComplete(item_text,performanceActionMatch);
