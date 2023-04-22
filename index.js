@@ -38,7 +38,7 @@ async function action() {
   let containCheckList = false;
   let ScreenChangeContainsChecklist = false;
   let PDFChangeContainChecklist = false;
-  let body = bodyList[1];
+  let body = bodyList[0];
   var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
   var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
   var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
