@@ -52,7 +52,6 @@ async function action() {
       var item_text = itemType[2];
 	   if(itemSelected) {
 		  changeTypeSelected = true;
-		  console.log("changeTypeSelected " + changeTypeSelected);
 		  if (item_text == "Screen Change") {
 			screenTaskListCompleted = CheckIfTaskListComplete(item_text,screenActionMatch);
 		  } else if (item_text == "PDF") {
@@ -60,11 +59,8 @@ async function action() {
 		  } else if (item_text == "103 XSL Update") {
 			acordTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
 		  }
-	  }  else if (!changeTypeSelected)  {
-           changeTypeincompleteItems.push(item_text);
-	  } 
+	  }
     }
-	
   }
   if (changeTypeincompleteItems.length > 0) {
     core.setFailed(
