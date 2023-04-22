@@ -52,7 +52,7 @@ async function action() {
 	   if(itemSelected) {
 		  changeTypeSelected = true;
 		  if (item_text == "Screen Change") {
-			CheckIfTaskListComplete(item_text,screenActionMatch,screenChangeIncompleteItems);
+			CheckIfTaskListComplete(item_text,screenActionMatch,screenTaskListCompleted);
 		  } else if (item_text == "PDF") {
 			for (let item of pdfActionMatch) {
 				var action_is_complete = item[1] != " ";
@@ -75,9 +75,9 @@ async function action() {
     return;
   }
   
-  if (screenChangeIncompleteItems.length > 0) {
+  if (!screenTaskListCompleted) {
     core.setFailed(
-      "The following items are not marked as completed for screen checklist : " + screenChangeIncompleteItems.join("\n")
+      "Screen checklist not completed"
     );
     return;
   }
@@ -110,16 +110,12 @@ if (require.main === module) {
   action();
 }
 
-function CheckIfTaskListComplete(changeType,taskList,incompleteItem) {
-	var taskListCompleted = false;
-	console.log("task list " + taskList);
+function CheckIfTaskListComplete(changeType,taskList,taskListCompleted) {
 	for (let item of taskList) {
 		var action_is_complete = item[1] != " ";
 		var action_text = item[2];
 	    if (action_is_complete) {
 			taskListCompleted = true;
-	   } else if (!taskListCompleted && !action_is_complete) {
-			incompleteItem.push(action_text);
 	   }
 	}
 }
