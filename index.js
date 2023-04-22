@@ -3,10 +3,12 @@ const github = require("@actions/github");
 
 const TASK_LIST_ITEM_CHANGE_TYPE = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScreen Change|PDF|103 XSL Update|Config|Performance|VB Custom Assembly|JS Custom Assembly)\b/g;
 const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScreen Status Validation|Object Properties Validation|Screen and Object Trigger\b)/g;
-const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bForm Trigger in right order and scenario|Data Handling. For Example : mapping, clearing, font type, font size|Form's Doctype and docdesc definition in config file|Form's signature variable is defined in Signature attribute\b)/g;
+const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bForm Trigger in right order and scenario|Data Handling. For Example : mapping, clearing, font type, font size|Form's Doctype and docdesc definition in config file|Form's signature letiable is defined in Signature attribute\b)/g;
 const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bParty relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b)/g;
 const PERFORMANCE_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bChrome Dev tool SLA <= 5s ?)/g;
-const CONFIG_TAKS_LIST_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bChange applied to ALL applicable environments ?|Correct value being set to corresponding environment in Octopus variable ?\b)/g;
+const CONFIG_TAKS_LIST_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bChange applied to ALL applicable environments ?|Correct value being set to corresponding environment in Octopus letiable ?\b)/g;
+const VB_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bCustom Data Creation and Deletion Handling|Error Handling|Form trigger logic Handling\b)/g;
+const JS_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bFunction naming convention|Proper Data Retrieval call by using the function getValues|No refresh error when calling the js function on NGSD screen|Custom Data Creation and Deletion Handling\b)/g;
 
 async function action() {
   const bodyList = [];
@@ -42,34 +44,50 @@ async function action() {
   let containCheckList = false;
   let ScreenChangeContainsChecklist = false;
   let PDFChangeContainChecklist = false;
+  let vbTaskListCompleted = false;
+  let jsTaskListCompleted = false;
   let body = bodyList[0];
-  var matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
-  var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
-  var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
-  var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
-  var configActionMatch = [...body.matchAll(CONFIG_TAKS_LIST_ACTION_ITEM)];
-  var performanceActionMatch = [...body.matchAll(PERFORMANCE_TASK_LIST_CHANGE_ACTION_ITEM)];
+  let matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
+  let screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
+  let pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
+  let acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
+  let configActionMatch = [...body.matchAll(CONFIG_TAKS_LIST_ACTION_ITEM)];
+  let performanceActionMatch = [...body.matchAll(PERFORMANCE_TASK_LIST_CHANGE_ACTION_ITEM)];
+  let vbActionMatch = [...body.matchAll(VB_TASK_LIST_CHANGE_ACTION_ITEM)];
+  let jsActionMatch = [...body.matchAll(JS_TASK_LIST_CHANGE_ACTION_ITEM)];
   for (let itemType of matches) {
-      var itemSelected = itemType[1] != " ";
-      var item_text = itemType[2];
+      let itemSelected = itemType[1] != " ";
+      let item_text = itemType[2];
 	   if(itemSelected) {
 		  changeTypeSelected = true;
 		  console.log("item text " + item_text);
 		  if (item_text == "Screen Change") {
 			screenTaskListCompleted = CheckIfTaskListComplete(item_text,screenActionMatch);
 			console.log("screenTaskListCompleted " + screenTaskListCompleted);
-		  } else if (item_text == "PDF") {
+		  } 
+		  if (item_text == "PDF") {
 			pdfTaskListCompleted = CheckIfTaskListComplete(item_text,pdfActionMatch);
 			console.log("pdfTaskListCompleted " + pdfTaskListCompleted);
-		  } else if (item_text == "103 XSL Update") {
+		  } 
+		  if (item_text == "103 XSL Update") {
 			acordTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
 			console.log("acordTaskListCompleted " + acordTaskListCompleted);
-		  } else if (item_text == "Config") {
+		  } 
+		  if (item_text == "Config") {
 			configTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
 			console.log("acordTaskListCompleted " + configTaskListCompleted);
-		  } else if (item_text == "Performance") {
+		  } 
+		  if (item_text == "Performance") {
 			performanceTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
 			console.log("acordTaskListCompleted " + performanceActionMatch);
+		  } 
+		  if (item_text == "VB Custom Assembly") {
+			vbTaskListCompleted = CheckIfTaskListComplete(item_text,vbActionMatch);
+			console.log("acordTaskListCompleted " + vbTaskListCompleted);
+		  } 
+		  if (item_text == "JS Custom Assembly") {
+			jsTaskListCompleted = CheckIfTaskListComplete(item_text,vbActionMatch);
+			console.log("acordTaskListCompleted " + jsTaskListCompleted);
 		  }
 	  }
     }
@@ -100,7 +118,7 @@ async function action() {
     );
   }
   
-  if (!performancetaskListCompleted) {
+  if (!performanceTaskListCompleted) {
 	  core.setFailed(
       "Performance checklist not completed"
     );
@@ -109,6 +127,18 @@ async function action() {
   if (!configTaskListCompleted) {
 	  core.setFailed(
       "Config checklist not completed"
+    );
+  }
+  
+  if (!vbTaskListCOmpleted) {
+	  core.setFailed(
+      "VB Custom Assembly checklist not completed"
+    );
+  }
+  
+  if (!jsTaskListCompleted) {
+	  core.setFailed(
+      "JS Custom Assembly checklist not completed"
     );
   }
 
@@ -129,8 +159,8 @@ if (require.main === module) {
 
 function CheckIfTaskListComplete(changeType,taskList) {
 	for (let item of taskList) {
-		var action_is_complete = item[1] != " ";
-		var action_text = item[2];
+		let action_is_complete = item[1] != " ";
+		let action_text = item[2];
 	    if (!action_is_complete) {
 			return false;
 			break;
