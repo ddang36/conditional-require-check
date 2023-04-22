@@ -6,8 +6,6 @@ const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScr
 const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bForm Trigger in right order and scenario|Data Handling. For Example : mapping, clearing, font type, font size|Form's Doctype and docdesc definition in config file|Form's signature variable is defined in Signature attribute\b)/g;
 const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /\bParty Relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b/g;
 
-var screenTaskListCompleted = false;
-var pdfTaskListCompleted = false;
 async function action() {
   const bodyList = [];
 
@@ -33,6 +31,8 @@ async function action() {
   }
 
   // Check each comment for a checklist
+  let screenTaskListCompleted = false;
+  let pdfTaskListCompleted = false;
   let changeTypeSelected = false;
   let containCheckList = false;
   let ScreenChangeContainsChecklist = false;
@@ -52,7 +52,7 @@ async function action() {
 	   if(itemSelected) {
 		  changeTypeSelected = true;
 		  if (item_text == "Screen Change") {
-			CheckIfTaskListComplete(item_text,screenActionMatch,screenTaskListCompleted);
+			screenTaskListCompleted = CheckIfTaskListComplete(item_text,screenActionMatch);
 		  } else if (item_text == "PDF") {
 			for (let item of pdfActionMatch) {
 				var action_is_complete = item[1] != " ";
@@ -110,12 +110,13 @@ if (require.main === module) {
   action();
 }
 
-function CheckIfTaskListComplete(changeType,taskList,taskListCompleted) {
+function CheckIfTaskListComplete(changeType,taskList) {
 	for (let item of taskList) {
 		var action_is_complete = item[1] != " ";
 		var action_text = item[2];
 	    if (action_is_complete) {
-			taskListCompleted = true;
+			return true;
+			break;
 	   }
 	}
 }
