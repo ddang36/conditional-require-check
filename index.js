@@ -76,19 +76,19 @@ async function action() {
 		  } 
 		  if (item_text == "Config") {
 			configTaskListCompleted = CheckIfTaskListComplete(item_text,configActionMatch);
-			console.log("acordTaskListCompleted " + configTaskListCompleted);
+			console.log("configTaskListCompleted " + configTaskListCompleted);
 		  } 
 		  if (item_text == "Performance") {
 			performanceTaskListCompleted = CheckIfTaskListComplete(item_text,performanceActionMatch);
-			console.log("acordTaskListCompleted " + performanceActionMatch);
+			console.log("performanceTaskListCompleted " + performanceActionMatch);
 		  } 
 		  if (item_text == "VB Custom Assembly") {
 			vbTaskListCompleted = CheckIfTaskListComplete(item_text,vbActionMatch);
-			console.log("acordTaskListCompleted " + vbTaskListCompleted);
+			console.log("vbTaskListCompleted " + vbTaskListCompleted);
 		  } 
 		  if (item_text == "JS Custom Assembly") {
 			jsTaskListCompleted = CheckIfTaskListComplete(item_text,jsActionMatch);
-			console.log("acordTaskListCompleted " + jsTaskListCompleted);
+			console.log("jsTaskListCompleted " + jsTaskListCompleted);
 		  }
 	  }
     }
