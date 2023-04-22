@@ -52,6 +52,7 @@ async function action() {
       var item_text = itemType[2];
 	   if(itemSelected) {
 		  changeTypeSelected = true;
+		  console.log("item text " + item_text);
 		  if (item_text == "Screen Change") {
 			screenTaskListCompleted = CheckIfTaskListComplete(item_text,screenActionMatch);
 		  } else if (item_text == "PDF") {
