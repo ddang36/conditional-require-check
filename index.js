@@ -59,13 +59,11 @@ async function action() {
 	   if(itemSelected) {
 		  changeTypeSelected = true;
 		  if (item_text == "Screen Change") {
-			console.log("screen task list " + screenActionMatch);
 			screenTaskListCompleted = CheckIfTaskListComplete(item_text,screenActionMatch);
 		  } 
 		  if (item_text == "PDF") {
 			console.log("pdf task list " + pdfActionMatch);
 			pdfTaskListCompleted = CheckIfTaskListComplete(item_text,pdfActionMatch);
-			console.log("pdfTaskListCompleted " + pdfTaskListCompleted);
 		  } 
 		  if (item_text == "103 XSL Update") {
 			acordTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
