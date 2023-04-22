@@ -61,10 +61,12 @@ async function action() {
 		  changeTypeSelected = true;
 		  console.log("item text " + item_text);
 		  if (item_text == "Screen Change") {
+			console.log("screen task list " + screenActionMatch);
 			screenTaskListCompleted = CheckIfTaskListComplete(item_text,screenActionMatch);
 			console.log("screenTaskListCompleted " + screenTaskListCompleted);
 		  } 
 		  if (item_text == "PDF") {
+			console.log("pdf task list " + pdfActionMatch);
 			pdfTaskListCompleted = CheckIfTaskListComplete(item_text,pdfActionMatch);
 			console.log("pdfTaskListCompleted " + pdfTaskListCompleted);
 		  } 
