@@ -5,6 +5,8 @@ const TASK_LIST_ITEM_CHANGE_TYPE = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScreen Chang
 const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScreen Status Validation|Object Properties Validation|Screen and Object Trigger\b)/g;
 const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bForm Trigger in right order and scenario|Data Handling. For Example : mapping, clearing, font type, font size|Form's Doctype and docdesc definition in config file|Form's signature variable is defined in Signature attribute\b)/g;
 const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bParty relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b)/g;
+const PERFORMANCE_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bChrome Dev tool SLA <= 5s ?)/g;
+const CONFIG_TAKS_LIST_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bChange applied to ALL applicable environments ?|Correct value being set to corresponding environment in Octopus variable ?\b)/g;
 
 async function action() {
   const bodyList = [];
@@ -33,6 +35,8 @@ async function action() {
   // Check each comment for a checklist
   let screenTaskListCompleted = true;
   let pdfTaskListCompleted = true;
+  let performanceTaskListCompleted = true;
+  let configTaskListCompleted = true;
   let acordTaskListCompleted = true;
   let changeTypeSelected = false;
   let containCheckList = false;
@@ -43,6 +47,8 @@ async function action() {
   var screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
   var pdfActionMatch = [...body.matchAll(PDF_TASK_LIST_CHANGE_ACTION_ITEM)];
   var acordActionMatch=[...body.matchAll(ACORD_TASK_LIST_CHANGE_ACTION_ITEM)];
+  var configActionMatch = [...body.matchAll(CONFIG_TAKS_LIST_ACTION_ITEM)];
+  var performanceActionMatch = [...body.matchAll(PERFORMANCE_TASK_LIST_CHANGE_ACTION_ITEM)];
   for (let itemType of matches) {
       var itemSelected = itemType[1] != " ";
       var item_text = itemType[2];
@@ -58,12 +64,18 @@ async function action() {
 		  } else if (item_text == "103 XSL Update") {
 			acordTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
 			console.log("acordTaskListCompleted " + acordTaskListCompleted);
+		  } else if (item_text == "Config") {
+			configTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
+			console.log("acordTaskListCompleted " + configTaskListCompleted);
+		  } else if (item_text == "Performance") {
+			performanceTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
+			console.log("acordTaskListCompleted " + performanceActionMatch);
 		  }
 	  }
     }
   if (!changeTypeSelected) {
     core.setFailed(
-      "Change type not selected: " + changeTypeincompleteItems.join("\n")
+      "Change type not selected: "
     );
     return;
   }
@@ -85,6 +97,18 @@ async function action() {
   if (!acordTaskListCompleted) {
 	  core.setFailed(
       "ACORD checklist not completed"
+    );
+  }
+  
+  if (!performancetaskListCompleted) {
+	  core.setFailed(
+      "Performance checklist not completed"
+    );
+  }
+  
+  if (!configTaskListCompleted) {
+	  core.setFailed(
+      "Config checklist not completed"
     );
   }
 
