@@ -42,10 +42,8 @@ async function action() {
   let acordTaskListCompleted = true;
   let changeTypeSelected = false;
   let containCheckList = false;
-  let ScreenChangeContainsChecklist = false;
-  let PDFChangeContainChecklist = false;
-  let vbTaskListCompleted = false;
-  let jsTaskListCompleted = false;
+  let vbTaskListCompleted = true;
+  let jsTaskListCompleted = true;
   let body = bodyList[0];
   let matches = [...body.matchAll(TASK_LIST_ITEM_CHANGE_TYPE)];
   let screenActionMatch = [...body.matchAll(SCREEN_TASK_LIST_CHANGE_ACTION_ITEM)];
