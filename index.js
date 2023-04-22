@@ -130,7 +130,7 @@ async function action() {
     );
   }
   
-  if (!vbTaskListCOmpleted) {
+  if (!vbTaskListCompleted) {
 	  core.setFailed(
       "VB Custom Assembly checklist not completed"
     );
