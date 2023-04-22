@@ -165,6 +165,7 @@ let isTaskCompleted = true;
 		let action_text = item[2];
 		console.log ("action_is_completed " + action_is_complete);
 	    if (action_is_complete) {
+			isTaskCompleted = true;
 			return isTaskCompleted;
 	    } else {
 			isTaskCompleted = false;
