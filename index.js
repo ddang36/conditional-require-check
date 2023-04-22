@@ -3,7 +3,7 @@ const github = require("@actions/github");
 
 const TASK_LIST_ITEM_CHANGE_TYPE = /(?:^|\n)\s*-\s+\[([xX])\]\s+(\bScreen Change|PDF|103 XSL Update|Config|Performance|VB Custom Assembly|JS Custom Assembly)\b/g;
 const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScreen Status Validation|Object Properties Validation|Object Error Handling|Screen and Object Trigger\b)/g;
-const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bForm Trigger in right order and scenario|Data Handling. For Example : mapping, clearing, font type, font size|Form's Doctype and docdesc definition in config file|Form's signature letiable is defined in Signature attribute\b)/g;
+const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bForm Trigger in right order and scenario|Data Handling. For example, mapping, clearing, font size, font type|Form's Doctype and docdesc definition in config file|Form's signature letiable is defined in Signature attribute\b)/g;
 const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bParty relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b)/g;
 const PERFORMANCE_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bChrome Dev tool SLA <= 5s ?)/g;
 const CONFIG_TAKS_LIST_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bChange applied to ALL applicable environments ?|Correct value being set to corresponding environment in Octopus letiable ?\b)/g;
