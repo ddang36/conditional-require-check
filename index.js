@@ -1,14 +1,14 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 
-const TASK_LIST_ITEM_CHANGE_TYPE = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScreen Change|PDF|103 XSL Update|Config|Performance|VB Custom Assembly|JS Custom Assembly)\b/g;
-const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bScreen Status Validation|Object Properties Validation|Screen and Object Trigger\b)/g;
-const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bForm Trigger in right order and scenario|Data Handling. For Example : mapping, clearing, font type, font size|Form's Doctype and docdesc definition in config file|Form's signature letiable is defined in Signature attribute\b)/g;
-const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bParty relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b)/g;
-const PERFORMANCE_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bChrome Dev tool SLA <= 5s ?)/g;
+const TASK_LIST_ITEM_CHANGE_TYPE = /(?:^|\n)\s*-\s+\[([xX])\]\s+(\bScreen Change|PDF|103 XSL Update|Config|Performance|VB Custom Assembly|JS Custom Assembly)\b/g;
+const SCREEN_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([xX])\]\s+(\bScreen Status Validation|Object Properties Validation|Screen and Object Trigger\b)/g;
+const PDF_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([xX])\]\s+(\bForm Trigger in right order and scenario|Data Handling. For Example : mapping, clearing, font type, font size|Form's Doctype and docdesc definition in config file|Form's signature letiable is defined in Signature attribute\b)/g;
+const ACORD_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([xX])\]\s+(\bParty relation|Correct Tag name,value, and tc code according to BRD and project's ACORD version|Schema Validation\b)/g;
+const PERFORMANCE_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([xX])\]\s+(\bChrome Dev tool SLA <= 5s ?)/g;
 const CONFIG_TAKS_LIST_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bChange applied to ALL applicable environments ?|Correct value being set to corresponding environment in Octopus letiable ?\b)/g;
-const VB_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bCustom Data Creation and Deletion Handling|Error Handling|Form trigger logic Handling\b)/g;
-const JS_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([ xX])\]\s+(\bFunction naming convention|Proper Data Retrieval call by using the function getValues|No refresh error when calling the js function on NGSD screen|Custom Data Creation and Deletion Handling\b)/g;
+const VB_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([xX])\]\s+(\bCustom Data Creation and Deletion Handling|Error Handling|Form trigger logic Handling\b)/g;
+const JS_TASK_LIST_CHANGE_ACTION_ITEM = /(?:^|\n)\s*-\s+\[([xX])\]\s+(\bFunction naming convention|Proper Data Retrieval call by using the function getValues|No refresh error when calling the js function on NGSD screen|Custom Data Creation and Deletion Handling\b)/g;
 
 async function action() {
   const bodyList = [];
@@ -58,7 +58,7 @@ async function action() {
   for (let itemType of matches) {
       let itemSelected = itemType[1] != " ";
       let item_text = itemType[2];
-	  console.log("itemType " + itemType);
+	  console.log("itemSelected " + itemSelected + " " + "item_text" + item_text);
 	   if(itemSelected) {
 		  changeTypeSelected = true;
 		  console.log("item text " + item_text);
