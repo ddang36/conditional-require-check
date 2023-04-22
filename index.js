@@ -33,6 +33,7 @@ async function action() {
   // Check each comment for a checklist
   let screenTaskListCompleted = false;
   let pdfTaskListCompleted = false;
+  let acordTaskListCompleted = false;
   let changeTypeSelected = false;
   let containCheckList = false;
   let ScreenChangeContainsChecklist = false;
@@ -56,7 +57,7 @@ async function action() {
 		  } else if (item_text == "PDF") {
 			pdfTaskListCompleted = CheckIfTaskListComplete(item_text,pdfActionMatch);
 		  } else if (item_text == "103 XSL Update") {
-			pdfTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
+			acordTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
 		  }
 	  }  else if (!changeTypeSelected)  {
            changeTypeincompleteItems.push(item_text);
@@ -78,16 +79,16 @@ async function action() {
     return;
   }
   
-  if (pdfChangeIncompleteItems.length > 0) {
+  if (!pdfTaskListCompleted) {
     core.setFailed(
-      "The following items are not marked as completed for pdf checklist : " + pdfChangeIncompleteItems.join("\n")
+      "PDF Checklist not completed"
     );
     return;
   }
   
-  if (acordChangeIncompleteItems.length > 0) {
+  if (!acordTaskListCompleted) {
 	  core.setFailed(
-      "The following items are not marked as completed for acord checklist : " + acordChangeIncompleteItems.join("\n")
+      "ACORD checklist not completed"
     );
   }
 
