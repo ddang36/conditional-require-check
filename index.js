@@ -75,7 +75,7 @@ async function action() {
     }
   if (!changeTypeSelected) {
     core.setFailed(
-      "Change type not selected: "
+      "Change type not selected"
     );
     return;
   }
