@@ -58,6 +58,7 @@ async function action() {
   for (let itemType of matches) {
       let itemSelected = itemType[1] != " ";
       let item_text = itemType[2];
+	  console.log("itemType " + itemType);
 	   if(itemSelected) {
 		  changeTypeSelected = true;
 		  console.log("item text " + item_text);
@@ -74,11 +75,11 @@ async function action() {
 			console.log("acordTaskListCompleted " + acordTaskListCompleted);
 		  } 
 		  if (item_text == "Config") {
-			configTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
+			configTaskListCompleted = CheckIfTaskListComplete(item_text,configActionMatch);
 			console.log("acordTaskListCompleted " + configTaskListCompleted);
 		  } 
 		  if (item_text == "Performance") {
-			performanceTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
+			performanceTaskListCompleted = CheckIfTaskListComplete(item_text,performanceActionMatch);
 			console.log("acordTaskListCompleted " + performanceActionMatch);
 		  } 
 		  if (item_text == "VB Custom Assembly") {
@@ -86,7 +87,7 @@ async function action() {
 			console.log("acordTaskListCompleted " + vbTaskListCompleted);
 		  } 
 		  if (item_text == "JS Custom Assembly") {
-			jsTaskListCompleted = CheckIfTaskListComplete(item_text,vbActionMatch);
+			jsTaskListCompleted = CheckIfTaskListComplete(item_text,jsActionMatch);
 			console.log("acordTaskListCompleted " + jsTaskListCompleted);
 		  }
 	  }
