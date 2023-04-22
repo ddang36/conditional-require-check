@@ -118,8 +118,8 @@ function CheckIfTaskListComplete(changeType,taskList,incompleteItem) {
 		var action_text = item[2];
 	    if (action_is_complete) {
 			taskListCompleted = true;
-	   } else if (!taskListCompleted) {
-		   	incompleteItem.push(action_text);
+	   } else if (!taskListCompleted && !action_is_complete) {
+			incompleteItem.push(action_text);
 	   }
 	}
 }
