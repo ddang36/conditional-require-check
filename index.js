@@ -55,10 +55,13 @@ async function action() {
 		  console.log("item text " + item_text);
 		  if (item_text == "Screen Change") {
 			screenTaskListCompleted = CheckIfTaskListComplete(item_text,screenActionMatch);
+			console.log("screenTaskListCompleted " + screenTaskListCompleted);
 		  } else if (item_text == "PDF") {
 			pdfTaskListCompleted = CheckIfTaskListComplete(item_text,pdfActionMatch);
+			console.log("pdfTaskListCompleted " + pdfTaskListCompleted);
 		  } else if (item_text == "103 XSL Update") {
 			acordTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
+			console.log("acordTaskListCompleted " + acordTaskListCompleted);
 		  }
 	  }
     }
