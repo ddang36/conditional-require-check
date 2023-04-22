@@ -10,6 +10,9 @@
 # FROM node:10-slim
 FROM node:slim
 
+# Labels for GitHub to read your action
+LABEL "com.github.actions.name"="Require Checklist"
+
 # Copy the package.json and package-lock.json
 COPY package*.json ./
 
