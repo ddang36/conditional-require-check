@@ -162,7 +162,6 @@ function CheckIfTaskListComplete(changeType,taskList) {
 		let action_text = item[2];
 	    if (!action_is_complete) {
 			return false;
-			break;
 	   }
 	}
 }
