@@ -56,14 +56,11 @@ async function action() {
   for (let itemType of matches) {
       let itemSelected = itemType[1] != " ";
       let item_text = itemType[2];
-	  console.log("itemSelected " + itemSelected + " " + "item_text" + item_text);
 	   if(itemSelected) {
 		  changeTypeSelected = true;
-		  console.log("item text " + item_text);
 		  if (item_text == "Screen Change") {
 			console.log("screen task list " + screenActionMatch);
 			screenTaskListCompleted = CheckIfTaskListComplete(item_text,screenActionMatch);
-			console.log("screenTaskListCompleted " + screenTaskListCompleted);
 		  } 
 		  if (item_text == "PDF") {
 			console.log("pdf task list " + pdfActionMatch);
@@ -72,7 +69,6 @@ async function action() {
 		  } 
 		  if (item_text == "103 XSL Update") {
 			acordTaskListCompleted = CheckIfTaskListComplete(item_text,acordActionMatch);
-			console.log("acordTaskListCompleted " + acordTaskListCompleted);
 		  } 
 		  if (item_text == "Config") {
 			configTaskListCompleted = CheckIfTaskListComplete(item_text,configActionMatch);
@@ -80,15 +76,12 @@ async function action() {
 		  } 
 		  if (item_text == "Performance") {
 			performanceTaskListCompleted = CheckIfTaskListComplete(item_text,performanceActionMatch);
-			console.log("performanceTaskListCompleted " + performanceActionMatch);
 		  } 
 		  if (item_text == "VB Custom Assembly") {
 			vbTaskListCompleted = CheckIfTaskListComplete(item_text,vbActionMatch);
-			console.log("vbTaskListCompleted " + vbTaskListCompleted);
 		  } 
 		  if (item_text == "JS Custom Assembly") {
 			jsTaskListCompleted = CheckIfTaskListComplete(item_text,jsActionMatch);
-			console.log("jsTaskListCompleted " + jsTaskListCompleted);
 		  }
 	  }
     }
@@ -163,7 +156,6 @@ let isTaskCompleted = true;
 	for (let item of taskList) {
 		let action_is_complete = item[1] != " ";
 		let action_text = item[2];
-		console.log ("action_is_completed " + action_is_complete);
 	    if (action_is_complete) {
 			isTaskCompleted = true;
 			return isTaskCompleted;
