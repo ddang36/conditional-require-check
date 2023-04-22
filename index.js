@@ -141,7 +141,6 @@ let isTaskCompleted = true;
 	for (let item of taskList) {
 		let action_is_complete = item[1] != " ";
 		let action_text = item[2];
-		console.log("action_text " + action_text + " " + "action_is_completed " + action_is_complete);
 	    if (action_is_complete) {
 			isTaskCompleted = true;
 			return isTaskCompleted;
