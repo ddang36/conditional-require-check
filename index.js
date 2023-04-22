@@ -111,12 +111,15 @@ if (require.main === module) {
 }
 
 function CheckIfTaskListComplete(changeType,taskList,incompleteItem) {
+	var taskListCompleted = false;
 	console.log("task list " + taskList);
 	for (let item of taskList) {
 		var action_is_complete = item[1] != " ";
 		var action_text = item[2];
-	    if (!action_is_complete) {
-			incompleteItem.push(action_text);
+	    if (action_is_complete) {
+			taskListCompleted = true;
+	   } else if (!taskListCompleted) {
+		   	incompleteItem.push(action_text);
 	   }
 	}
 }
