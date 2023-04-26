@@ -21,6 +21,7 @@ async function action() {
     issue_number: github.context.issue.number,
   });
 
+  console.log("issue.body " + issue.body);
   if (issue.body) {
     bodyList.push(issue.body);
   }
@@ -30,6 +31,7 @@ async function action() {
     issue_number: github.context.issue.number,
   });
 
+  console.log("comment " + comments);
   for (let comment of comments) {
     bodyList.push(comment.body);
   }
