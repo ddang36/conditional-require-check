@@ -1,32 +1,29 @@
 {
-  "name": "require-checklist",
+  "//1": "describes your app and its dependencies",
+  "//2": "https://docs.npmjs.com/files/package.json",
+  "//3": "updating this file will download and update your packages",
+  "name": "task-list-completed",
   "version": "1.0.0",
-  "private": true,
-  "description": "A Probot app",
-  "author": "Donnie Dang",
+  "description": "Check a pull requests task list is complete",
+  "author": "stilliard <andrew@stapps.io>",
   "license": "ISC",
-  "homepage": "https://github.com//",
-  "keywords": [
-    "probot",
-    "github",
-    "probot-app"
-  ],
+  "repository": "https://github.com/stilliard/github-task-list-completed.git",
   "scripts": {
+    "dev-debug": "nodemon --exec \"LOG_LEVEL=debug npm start\"",
+    "dev": "nodemon --exec \"npm start\"",
     "start": "probot run ./index.js",
     "test": "jest"
   },
   "dependencies": {
-    "probot": "^12.2.4"
+    "marked": "^4.0.10",
+    "probot": "^12.2.2"
   },
   "devDependencies": {
-    "jest": "^29.0.0",
-    "nock": "^13.0.5",
-    "smee-client": "^1.2.2"
+    "jest": "^27.4.7",
+    "smee-client": "1.1"
   },
   "engines": {
-    "node": ">= 10.13.0"
-  },
-  "jest": {
-    "testEnvironment": "node"
+    "node": "8.9",
+    "npm": "5.6"
   }
 }
