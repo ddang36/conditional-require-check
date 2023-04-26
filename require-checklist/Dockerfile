@@ -1,6 +1,6 @@
 FROM node:18-slim
 WORKDIR /usr/src/app
-COPY package.json package-lock.json conditional-require-check/
+COPY package.json package-lock.json ./
 RUN npm ci --production
 RUN npm cache clean --force
 ENV NODE_ENV="production"
