@@ -9,8 +9,10 @@ module.exports = (app) => {
     });
     return context.octokit.issues.createComment(issueComment);
   });
-  
+  // lookup the pr
+    let pr = context.payload.pull_request;
   app.onAny(async (context) => {
+	context.log.info(pr);
     context.log.info({ event: context.name, action: context.payload.action });
   });
 
