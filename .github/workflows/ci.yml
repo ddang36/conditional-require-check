@@ -11,7 +11,19 @@ jobs:
      
     -uses: action/setup-node@v3.1.1
      with:
-        node-version: v16.14.02
-        cache: 'yarn'
-        cache-dependency-path: yarn.lock
-    - run: yarn install
+        node-version: v16.14.2
+    
+    -name: Get Node Version
+     id: Node
+     run: |
+       echo ":set-output name=version::$(node -v)"
+    
+    -name: Get node_modules Cache
+     uses: action/cache@v3.0.2
+     id: node_modules
+     with:
+        path: |
+          **/node_modules
+        key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.output.version }}
+     
+     -run: yarn install
